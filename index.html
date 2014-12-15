@@ -1,0 +1,58 @@
+<!doctype html>
+
+<html ng-app="evrApp">
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/products.css"/>
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css"/>
+        <script src="lib/angular.js"></script>
+        <script src="lib/jquery-1.11.1.min.js"></script>
+        <script src="lib/bootstrap/js/bootstrap.js"></script>
+        <script src="js/controllers/evrController.js"></script>
+    </head>
+
+    <body class="main" ng-controller="ProductsCtrl">
+
+    <div align="center">
+
+        <div class="filter">
+            <span>Filtering by:</span>
+            <input ng-model="tagInput" ng-change="sortByTag(this.tagInput)" class="tag-input"/>
+            <button ng-click="tagInput='';sortByTag()">X</button>
+        </div>
+
+        <ul>
+            <li class="product" ng-repeat="product in products">
+                <div ng-click="showModal(product)">
+                    <span >{{product.name}}</span>
+                    <img src="product.photo"/>
+                </div>
+                <a href="" class="tag" ng-click="sortByTag(tag)" ng-repeat="tag in product.tags">{{tag}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- ---------Modal--------- -->
+    <div id="productModal" class="modal">
+        <div class="modal-dialog modal-sm">
+            <div  align="center" class="modal-content">
+                <div class="modal-product">
+                    <label>Id:</label>
+                    <span>{{selectedProduct.id}}</span><br>
+                    <label>Name:</label>
+                    <span>{{selectedProduct.name}}</span><br>
+                    <label>Description:</label>
+                    <span>{{selectedProduct.description}}</span><br>
+                    <img src="selectedProduct.photo"/><br>
+                    <label>Tags:</label>
+                    <span>{{selectedProduct.tags}}</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ----------------------- -->
+
+    </body>
+</html>
